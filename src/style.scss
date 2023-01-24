@@ -1,9 +1,11 @@
+// Style de Login and Register
 .formContainer{
     background-color: #a7bcff;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: none;
 
     .formWrapper{
         background-color: white;
@@ -66,21 +68,5 @@
             font-size: 12px;
             margin-top: 10px;
         }
-    }
-}
-
-.home{
-    background-color: yellowgreen;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .container{
-        border: 1px solid white;
-        border-radius: 10px;
-        width: 65%;
-        height: 80%;
-        display: flex;
     }
 }
