@@ -40,6 +40,7 @@ const Register = () => {
             });
 
             await setDoc(doc(db, "userChats", res.user.uid), {});
+            navigate("/");
           });
         }
       );
