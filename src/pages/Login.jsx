@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Add from "../img/addAvatar.png";
+import users from "../img/user.png";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -23,8 +23,9 @@ const Login = () => {
   return (
     <div className="formContainer">
       <div className="formWrapper">
-        <span className="logo">Coti Chat</span>
-        <span className="title">Login</span>
+        {/* <span className="logo">Coti Chat</span> */}
+        <img src={users} alt="" />
+        <p className="title">Welcome to coti chat</p>
         <form onSubmit={handleSubmit}>
           <input type="email" placeholder="email" />
           <input type="password" placeholder="password" />
