@@ -2,7 +2,7 @@
   "name": "chatapplication",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://constanzarassi.github.io/ChatApplication",
+  "homepage": "https://constanzarassi.github.io/chatapplication",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
