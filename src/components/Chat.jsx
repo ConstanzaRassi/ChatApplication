@@ -5,6 +5,11 @@ import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
 import { ChatContext } from "../context/ChatContext";
+import {
+  BsCameraVideoFill,
+  BsFillTelephoneFill,
+  BsThreeDotsVertical,
+} from "react-icons/bs";
 
 const Chat = () => {
   const { data } = useContext(ChatContext);
@@ -14,9 +19,9 @@ const Chat = () => {
       <div className="chatInfo">
         <span>{data.user?.displayName}</span>
         <div className="chatIcons">
-          <img src={Camera} alt="" />
-          <img src={AddFriend} alt="" />
-          <img src={More} alt="" />
+          <BsFillTelephoneFill />
+          <BsCameraVideoFill />
+          <BsThreeDotsVertical />
         </div>
       </div>
       <Messages />
