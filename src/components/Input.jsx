@@ -14,6 +14,7 @@ import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -92,9 +93,14 @@ const Input = () => {
             onChange={(e) => setImg(e.target.files[0])}
           />
           <label htmlFor="file">
-            <img src={AttachFileIcon} alt="" />
+            <AttachFileIcon />
+            {/* <img src={AttachFileIcon} alt="" /> */}
           </label>
-          <button onClick={handleSend}>Send</button>
+          <button onClick={handleSend}>
+            <div>
+              <SendRoundedIcon />
+            </div>
+          </button>
         </div>
       </div>
     </div>
