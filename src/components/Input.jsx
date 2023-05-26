@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import Attach from "../img/attach.png";
-// import Add from "../img/addAvatar.png";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import {
@@ -42,6 +41,7 @@ const Input = () => {
                 img: downloadURL,
               }),
             });
+            setText("");
           });
         }
       );
@@ -55,6 +55,7 @@ const Input = () => {
             date: Timestamp.now(),
           }),
         });
+        setText("");
       }
     }
 
@@ -83,9 +84,15 @@ const Input = () => {
           placeholder="Type something..."
           onChange={(e) => setText(e.target.value)}
           value={text}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault(); // Evitar el comportamiento predeterminado del Enter
+              handleSend(); // Llamar al método handleSend
+            }
+          }}
         />
         <div className="send">
-          <img src={Attach} alt="" />
+          {/* <img src={Attach} alt="" /> */}
           <input
             type="file"
             style={{ display: "none" }}
