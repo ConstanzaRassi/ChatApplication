@@ -16,7 +16,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/chatapplication">
       <Routes>
         <Route path="">
           <Route
