@@ -50,7 +50,7 @@ body {
     position: absolute;
     padding: 20px 60px;
     background: rgba(0, 0, 0, 0.85);
-    border-radius: 15px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -82,9 +82,12 @@ body {
       flex-direction: column;
       gap: 15px;
 
+      .chooseAvatar {
+        color: white;
+      }
+
       input {
         border: none;
-
         background: radial-gradient(
           90.16% 143.01% at 15.32% 21.04%,
           rgba(255, 255, 255, 0.2) 0%,
@@ -96,7 +99,7 @@ body {
         padding: 15px;
         width: 250px;
         // border-bottom: 1px solid white;
-        border-radius: 12px;
+        border-radius: 10px;
         font-family: "Montserrat";
         color: white;
         &::placeholder {
@@ -116,7 +119,7 @@ body {
       button {
         margin-top: 40px;
         background: linear-gradient(90.3deg, #9c3fe4 0.16%, #c65647 101.62%);
-        border-radius: 12px;
+        border-radius: 10px;
         color: white;
         padding: 15px;
         font-weight: bold;
@@ -200,7 +203,6 @@ body {
           gap: 10px;
 
           img {
-            background-color: rgb(188, 41, 41);
             height: 24px;
             width: 24px;
             border-radius: 50%;
@@ -256,6 +258,7 @@ body {
             border: none;
             width: 100%;
             height: 20px;
+            font-family: "Montserrat";
             @include mobile {
               display: none;
             }
@@ -327,6 +330,7 @@ body {
       // padding: 0 0 12px 0;
       margin: 10px;
       border-radius: 10px;
+
       .chatInfo {
         height: 50px;
         background-color: rgb(20, 20, 20);
@@ -336,15 +340,28 @@ body {
         padding: 10px;
         color: #fafafa;
         border-radius: 10px 10px 0 0;
+        padding-left: 20px;
+
+        .chatUser {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            margin-right: 20px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+          }
+        }
+
+        .chatIcons {
+          display: flex;
+          gap: 20px;
+          color: #5d5fef;
+          cursor: pointer;
+        }
       }
 
-      .chatIcons {
-        display: flex;
-        gap: 20px;
-        color: #5d5fef;
-        // width: 40px;
-        cursor: pointer;
-      }
       .messages::-webkit-scrollbar {
         display: none; /* Safari and Chrome */
       }
@@ -362,9 +379,13 @@ body {
           .messageInfo {
             display: flex;
             flex-direction: column;
-            color: gray;
             font-weight: 300;
-
+            align-items: center;
+            span {
+              margin-top: 5px;
+              font-size: 13px;
+              color: #c6c6c6;
+            }
             img {
               width: 40px;
               height: 40px;
@@ -377,6 +398,7 @@ body {
             display: flex;
             flex-direction: column;
             gap: 10px;
+            font-size: 12px;
 
             p {
               background-color: #5e5e66;
@@ -418,16 +440,18 @@ body {
           display: flex;
           align-items: center;
           align-content: center;
-          border-radius: 15px;
-          // margin-top: 20px;
-          // margin-bottom: 10px;
+          border-radius: 10px;
+
           input {
             width: 90%;
+            margin-left: 10px;
             border: none;
             outline: none;
             color: rgb(216, 216, 216);
-            font-size: 14px;
+            font-size: 12px;
             background-color: transparent;
+            font-family: "Montserrat";
+
             &::placeholder {
               color: rgb(229, 229, 229);
             }
@@ -436,20 +460,30 @@ body {
           .send {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
-
-            img {
-              height: 24px;
+            .icon {
+              color: #5d5fef;
               cursor: pointer;
             }
 
-            button {
+            .button {
+              height: 38px;
+              width: 40px;
               border: none;
-              padding: 10px 15px;
               color: white;
               background-color: #5d5fef;
               border-radius: 10px;
               cursor: pointer;
+              align-items: center;
+              justify-content: center;
+              display: flex;
+
+              .icon {
+                margin-top: 2px;
+                margin-left: 2px;
+                color: wheat;
+              }
             }
           }
         }

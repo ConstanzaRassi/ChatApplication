@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Add from "../img/addAvatar.png";
 import Users from "../img/user.png";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
+import { RiFolderUserLine } from "react-icons/ri";
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -59,9 +59,9 @@ const Register = () => {
           <input type="email" placeholder="email" />
           <input type="password" placeholder="password" />
           <input style={{ display: "none" }} type="file" id="file" />
-          <label htmlFor="file">
-            <img src={Add} alt="" />
-            <span> Seleccionar avatar</span>
+          <label className="chooseAvatar" htmlFor="file">
+            <RiFolderUserLine />
+            <span> Choose your avatar</span>
           </label>
           <button>Sign Up</button>
           {err && <span>Something went wrong</span>}

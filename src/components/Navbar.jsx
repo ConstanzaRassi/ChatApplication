@@ -1,5 +1,4 @@
 import React from "react";
-// import profilePhoto from "../img/profile.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useContext } from "react";
@@ -13,6 +12,7 @@ const Navbar = () => {
       <span className="logo">Coti Chat</span>
       <div className="user">
         <img src={currentUser.photoURL} alt="" />
+        {/* <span>{currentUser.displayName.split(" ")[0]}</span> */}
         <span>{currentUser.displayName}</span>
         <div className="logoutIcon" onClick={() => signOut(auth)}>
           <MdLogout />

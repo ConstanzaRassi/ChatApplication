@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import Attach from "../img/attach.png";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import {
@@ -23,6 +22,10 @@ const Input = () => {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
+    if (text.trim() === "") {
+      // Verificar si el texto está vacío o contiene solo espacios en blanco
+      return; // Salir de la función sin hacer nada
+    }
     if (img) {
       const storageRef = ref(storage, uuid());
       const uploadTask = uploadBytesResumable(storageRef, img);
@@ -81,7 +84,7 @@ const Input = () => {
       <div className="input">
         <input
           type="text"
-          placeholder="Type something..."
+          placeholder="Write your message"
           onChange={(e) => setText(e.target.value)}
           value={text}
           onKeyDown={(e) => {
@@ -99,15 +102,15 @@ const Input = () => {
             id="file"
             onChange={(e) => setImg(e.target.files[0])}
           />
-          <label htmlFor="file">
+
+          <label className="icon" htmlFor="file">
             <AttachFileIcon />
-            {/* <img src={AttachFileIcon} alt="" /> */}
           </label>
-          <button onClick={handleSend}>
-            <div>
+          <div className="button" onClick={handleSend}>
+            <div className="icon">
               <SendRoundedIcon />
             </div>
-          </button>
+          </div>
         </div>
       </div>
     </div>
