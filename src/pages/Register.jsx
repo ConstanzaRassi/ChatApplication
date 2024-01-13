@@ -51,7 +51,7 @@ const Register = () => {
   return (
     <div className="formContainer">
       <div className="formWrapper">
-        {/* <span className="logo">Coti Chat</span> */}
+        <span className="logo">Spark Talks</span>
         <img src={Users} alt="" />
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
@@ -67,7 +67,10 @@ const Register = () => {
           {err && <span>Something went wrong</span>}
         </form>
         <p>
-          You do have an account? <Link to="/login">Login</Link>
+          You do have an account?{" "}
+          <Link to="/login" className="link">
+            Login
+          </Link>
         </p>
       </div>
     </div>

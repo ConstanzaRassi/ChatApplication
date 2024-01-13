@@ -32,29 +32,36 @@ const Chats = () => {
     <div className="chats">
       {Object.entries(chats)
         ?.sort((a, b) => b[1].date - a[1].date)
-        .map((chat) => (
-          <div
-            className="userChat"
-            key={chat[0]}
-            onClick={() => handleSelect(chat[1].userInfo)}
-          >
-            <img src={chat[1].userInfo.photoURL} alt="" />
-            <div className="userChatInfo">
-              <span>{chat[1].userInfo.displayName}</span>
-              <p>
-                {chat[1].lastMessage?.text ? (
-                  chat[1].lastMessage.text.length > 30 ? (
-                    chat[1].lastMessage.text.substring(0, 40) + "..."
+        .map((chat) => {
+          const lastMessage = chat[1].lastMessage;
+          const isCurrentUserMessage =
+            lastMessage?.senderId === currentUser.uid;
+
+          return (
+            <div
+              className="userChat"
+              key={chat[0]}
+              onClick={() => handleSelect(chat[1].userInfo)}
+            >
+              <img src={chat[1].userInfo.photoURL} alt="" />
+              <div className="userChatInfo">
+                <span>{chat[1].userInfo.displayName}</span>
+                <p>
+                  {isCurrentUserMessage && <i>You: </i>}
+                  {lastMessage?.text ? (
+                    lastMessage.text.length > 30 ? (
+                      lastMessage.text.substring(0, 40) + "..."
+                    ) : (
+                      lastMessage.text
+                    )
                   ) : (
-                    chat[1].lastMessage.text
-                  )
-                ) : (
-                  <i>Image</i>
-                )}
-              </p>
+                    <i>Image</i>
+                  )}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
     </div>
   );
 };

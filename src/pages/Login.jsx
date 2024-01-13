@@ -25,7 +25,7 @@ const Login = () => {
       <div className="formWrapper">
         {/* <span className="logo">Coti Chat</span> */}
         <img src={users} alt="" />
-        <p className="title">Welcome to coti chat</p>
+        <p className="title">Welcome to Spark Talks</p>
         <form onSubmit={handleSubmit}>
           <input type="email" placeholder="email" />
           <input type="password" placeholder="password" />
@@ -34,7 +34,10 @@ const Login = () => {
           {err && <span>Something went wrong</span>}
         </form>
         <p>
-          You don't have an account? <Link to="/register">Register</Link>
+          You don't have an account?{" "}
+          <Link to="/register" className="link">
+            Register
+          </Link>
         </p>
       </div>
     </div>

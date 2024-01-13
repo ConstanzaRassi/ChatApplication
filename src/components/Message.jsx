@@ -58,11 +58,12 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        <span>{displayTime}</span>
+        {/* <span>{displayTime}</span> */}
       </div>
       <div className="messageContent">
         {message.text !== "" && <p>{message.text}</p>}
         {message.img && <img src={message.img} alt="" />}
+        <span>{displayTime}</span>
       </div>
     </div>
   );

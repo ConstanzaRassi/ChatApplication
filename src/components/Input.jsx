@@ -22,10 +22,7 @@ const Input = () => {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
-    if (text.trim() === "") {
-      // Verificar si el texto está vacío o contiene solo espacios en blanco
-      return; // Salir de la función sin hacer nada
-    }
+    //
     if (img) {
       const storageRef = ref(storage, uuid());
       const uploadTask = uploadBytesResumable(storageRef, img);
@@ -49,7 +46,10 @@ const Input = () => {
         }
       );
     } else {
-      if (text != null) {
+      if (text.trim() === "") {
+        // Verificar si el texto está vacío o contiene solo espacios en blanco
+        return; // Salir de la función sin hacer nada
+      } else if (text != null) {
         await updateDoc(doc(db, "chats", data.chatId), {
           messages: arrayUnion({
             id: uuid(),
@@ -65,6 +65,7 @@ const Input = () => {
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
+        senderId: currentUser.uid,
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
@@ -72,6 +73,7 @@ const Input = () => {
     await updateDoc(doc(db, "userChats", data.user.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
+        senderId: data.user.uid,
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
@@ -79,6 +81,7 @@ const Input = () => {
     setText("");
     setImg(null);
   };
+
   return (
     <div className="inputContainer">
       <div className="input">
