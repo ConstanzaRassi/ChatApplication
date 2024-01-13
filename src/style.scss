@@ -16,21 +16,24 @@
 }
 
 :root {
-  --color-primary: #650b0b;
-  --color-secondary: #ff7782;
-  --color-white: #202528;
+  --color-background: #282828;
+  --color-midground: #313131;
+  --color-foreground: #383838;
+  --color-highground: #505050;
 
-  --color-background: #f6f6f9;
+  --color-primary: #6c6dd4;
+  --color-font-primary: #ffffff;
+  --color-font-secondary: #a1a1a1;
 }
 
-.dark-theme-variables {
-  --color-background: #181a1e;
-  --color-white: #202528;
-  --color-dark: #edeffd;
-  --color-dark-variant: #a3bdcc;
-  --color-light: rgba(0, 0, 0, 0.4);
-  --box-shadow: 0 2rem 3rem var(--color-light);
-}
+// .dark-theme-variables {
+//   --color-background: #181a1e;
+//   --color-white: #202528;
+//   --color-dark: #edeffd;
+//   --color-dark-variant: #a3bdcc;
+//   --color-light: rgba(0, 0, 0, 0.4);
+//   --box-shadow: 0 2rem 3rem var(--color-light);
+// }
 
 $darkColor: #a7bcff;
 body {
@@ -39,7 +42,7 @@ body {
 }
 // Style de Login and Register
 .formContainer {
-  background-color: #272727;
+  background-color: var(--color-background);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -55,7 +58,7 @@ body {
     flex-direction: column;
     gap: 10px;
     align-items: center;
-    box-shadow: 0px 0px 62px rgba(78, 42, 157, 0.8);
+    box-shadow: 0px 0px 62px rgb(108, 109, 212);
 
     img {
       width: 190px;
@@ -118,7 +121,7 @@ body {
 
       button {
         margin-top: 40px;
-        background: linear-gradient(90.3deg, #9c3fe4 0.16%, #c65647 101.62%);
+        background: linear-gradient(90.3deg, #6c6dd4 0.16%, #da50e4 101.62%);
         border-radius: 10px;
         color: white;
         padding: 15px;
@@ -148,12 +151,16 @@ body {
       font-size: 12px;
       margin-top: 10px;
     }
+
+    .link {
+      color: white;
+    }
   }
 }
 
 // Style of Home
 .home {
-  background-color: #2f2f2f;
+  background-color: var(--color-background);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -175,7 +182,7 @@ body {
     //Sidebar Style
     .sidebar {
       flex: 1;
-      background-color: #3d3d3d;
+      background-color: var(--color-foreground);
       position: relative;
       margin: 10px;
       border-radius: 10px;
@@ -184,14 +191,15 @@ body {
       .navbar {
         display: flex;
         align-items: center;
-        background-color: #3d3d3d;
+        background-color: var(--color-foreground);
         height: 50px;
         padding: 10px;
         justify-content: space-between;
-        color: beige;
+        color: var(--color-font-primary);
         border-radius: 10px;
 
         .logo {
+          color: var(--color-primary);
           font-weight: bold;
           @include tablet {
             display: none;
@@ -214,7 +222,7 @@ body {
 
           //Logout Button
           .logoutIcon {
-            color: rgb(216, 216, 216);
+            color: var(--color-font-primary);
             width: 30px;
             height: 10px;
             // object-fit: cover;
@@ -234,18 +242,18 @@ body {
           display: flex;
           padding: 10px;
           margin: 10px;
-          background-color: rgb(76, 76, 76);
+          background-color: var(--color-highground);
           border: 1px white;
           border-radius: 10px;
 
           // justify-content: center;
           align-items: center;
 
-          &:focus {
-            background-color: #650b0b;
-          }
+          // &:focus {
+          //   background-color: #650b0b;
+          // }
           .icon {
-            color: white;
+            color: var(--color-font-primary);
             margin-left: 5px;
             margin-top: 3px;
             margin-right: 10px;
@@ -253,7 +261,7 @@ body {
           }
           input {
             background-color: transparent;
-            color: white;
+            color: var(--color-font-primary);
             outline: none;
             border: none;
             width: 100%;
@@ -271,14 +279,14 @@ body {
 
       //User Chat Style
       .userChat {
-        background: #292929;
+        background: var(--color-midground);
         margin: 10px;
         border-radius: 10px;
         padding: 10px;
         display: flex;
         align-items: center;
         gap: 10px;
-        color: white;
+        color: var(--color-font-primary);
         cursor: pointer;
 
         // filter: drop-shadow(0px 0px 8px #b7b9ff);
@@ -333,12 +341,12 @@ body {
 
       .chatInfo {
         height: 50px;
-        background-color: rgb(20, 20, 20);
+        background-color: var(--color-foreground);
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 10px;
-        color: #fafafa;
+        color: var(--color-font-primary);
         border-radius: 10px 10px 0 0;
         padding-left: 20px;
 
@@ -346,7 +354,9 @@ body {
           display: flex;
           justify-content: center;
           align-items: center;
+
           img {
+            background-color: transparent;
             margin-right: 20px;
             border-radius: 50%;
             width: 30px;
@@ -357,7 +367,7 @@ body {
         .chatIcons {
           display: flex;
           gap: 20px;
-          color: #5d5fef;
+          color: var(--color-primary);
           cursor: pointer;
         }
       }
@@ -366,7 +376,7 @@ body {
         display: none; /* Safari and Chrome */
       }
       .messages {
-        background-color: #292929;
+        background-color: var(--color-midground);
         padding: 10px;
         height: calc(100% - 160px);
         overflow-y: scroll;
@@ -381,11 +391,7 @@ body {
             flex-direction: column;
             font-weight: 300;
             align-items: center;
-            span {
-              margin-top: 5px;
-              font-size: 13px;
-              color: #c6c6c6;
-            }
+
             img {
               width: 40px;
               height: 40px;
@@ -399,10 +405,16 @@ body {
             flex-direction: column;
             gap: 10px;
             font-size: 14px;
+            span {
+              margin-top: -20px;
+              font-size: 11px;
+              color: var(--color-font-secondary);
+              // background-color: #292929;
+            }
 
             p {
-              background-color: #5e5e66;
-              color: white;
+              background-color: var(--color-highground);
+              color: var(--color-font-primary);
               padding: 10px 20px;
               border-radius: 0px 10px 10px 10px;
               max-width: max-content;
@@ -418,8 +430,8 @@ body {
             .messageContent {
               align-items: flex-end;
               p {
-                background-color: #7879f1;
-                color: white;
+                background-color: var(--color-primary);
+                color: var(--color-font-primary);
                 border-radius: 10px 0px 10px 10px;
               }
             }
@@ -429,13 +441,13 @@ body {
 
       .inputContainer {
         height: 70px;
-        background-color: #292929;
+        background-color: var(--color-midground);
         padding-left: 12px;
         padding-right: 12px;
         border-radius: 0 0 10px 10px;
         .input {
           height: 35px;
-          background-color: #545454;
+          background-color: var(--color-highground);
           padding: 10px;
           display: flex;
           align-items: center;
@@ -447,7 +459,7 @@ body {
             margin-left: 10px;
             border: none;
             outline: none;
-            color: rgb(216, 216, 216);
+            color: var(--color-font-secondary);
             font-size: 12px;
             background-color: transparent;
             font-family: "Montserrat";
@@ -463,7 +475,7 @@ body {
             justify-content: center;
             gap: 10px;
             .icon {
-              color: #5d5fef;
+              color: var(--color-primary);
               cursor: pointer;
             }
 
@@ -471,8 +483,8 @@ body {
               height: 38px;
               width: 40px;
               border: none;
-              color: white;
-              background-color: #5d5fef;
+              color: var(--color-font-primary);
+              background-color: var(--color-primary);
               border-radius: 10px;
               cursor: pointer;
               align-items: center;
@@ -482,7 +494,7 @@ body {
               .icon {
                 margin-top: 2px;
                 margin-left: 2px;
-                color: wheat;
+                color: var(--color-font-primary);
               }
             }
           }
