@@ -27,33 +27,71 @@ const Messages = () => {
     );
   };
 
+  const isSameYear = (date1, date2) => {
+    return date1.getFullYear() === date2.getFullYear();
+  };
+
+  const isToday = (date1, date2) => {
+    return date1.getDate() === date2.getDate();
+  };
+
+  const isYesterday = (date1, date2) => {
+    // Obtener las fechas de ayer y hoy
+    const yesterday = new Date(date2);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    // Compara solo el año, mes y día para determinar si es ayer
+    return (
+      date1.getFullYear() === yesterday.getFullYear() &&
+      date1.getMonth() === yesterday.getMonth() &&
+      date1.getDate() === yesterday.getDate()
+    );
+  };
+
   return (
     <div className="messages">
       {messages.map((m, index) => {
         // Check if it's the first message or if the current message is from a different day
+        if (index === 0) {
+          index = 1;
+        }
+
+        const message = messages[index - 1];
+        const seconds = message.date.seconds;
+
+        const seconds2 = m.date.seconds;
+
+        const currentMsgDate = new Date(seconds2 * 1000);
+        const previousMsgDate = new Date(seconds * 1000);
+
         const showDate =
           index === 0 ||
-          !isSameDay(
-            new Date(messages[index - 1].timestamp),
-            new Date(m.timestamp)
-          );
+          (currentMsgDate && !isSameDay(previousMsgDate, currentMsgDate));
+        const showYear =
+          index === 0 ||
+          (currentMsgDate && !isSameYear(previousMsgDate, currentMsgDate));
+        const isToday =
+          index === 0 ||
+          (currentMsgDate && isSameDay(previousMsgDate, currentMsgDate));
+        const isYesterdayDate =
+          index === 0 ||
+          (currentMsgDate && isYesterday(previousMsgDate, currentMsgDate));
 
         return (
           <div key={m.id}>
-            {/* {showDate && (
-              <span className="date">
-                <span className="date">
-                  {new Date(m.timestamp).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "numeric",
-                    hour12: true,
-                  })}
-                </span>
-              </span>
-            )} */}
+            {showDate && <div className="line"></div>}
+            {showYear && (
+              <div className="date">{currentMsgDate.getFullYear()}</div>
+            )}
+            {showDate && (
+              <div className="date">
+                {new Date(currentMsgDate).toLocaleDateString("en-US", {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "short",
+                })}
+              </div>
+            )}
             <Message message={m} />
           </div>
         );
