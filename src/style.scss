@@ -40,6 +40,17 @@ body {
   margin: 0;
   font-family: "Montserrat";
 }
+.notAvail {
+  background-color: var(--color-background);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat";
+  color: var(--color-font-primary);
+  text-align: center;
+}
 // Style de Login and Register
 .formContainer {
   background-color: var(--color-background);
@@ -160,6 +171,10 @@ body {
 
 // Style of Home
 .home {
+  @include tablet {
+    display: none;
+  }
+
   background-color: var(--color-background);
   height: 100vh;
   display: flex;
@@ -197,6 +212,9 @@ body {
         justify-content: space-between;
         color: var(--color-font-primary);
         border-radius: 10px;
+        @include mobile {
+          font-size: 13px;
+        }
 
         .logo {
           color: var(--color-primary);
@@ -313,7 +331,7 @@ body {
             font-size: 16px;
             font-weight: 500;
             @include mobile {
-              font-size: 13px;
+              display: none;
             }
           }
 
