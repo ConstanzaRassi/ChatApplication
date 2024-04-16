@@ -1,11 +1,13 @@
-import { doc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
 
-const Chats = () => {
+const Chats = ({ handleChatSelect }) => {
   const [chats, setChats] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedChat, setSelectedChat] = useState(null);
 
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
@@ -13,7 +15,12 @@ const Chats = () => {
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
-        setChats(doc.data());
+        if (doc.exists()) {
+          setChats(doc.data());
+        } else {
+          setChats([]);
+        }
+        setLoading(false);
       });
 
       return () => {
@@ -24,28 +31,41 @@ const Chats = () => {
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 
-  const handleSelect = (u) => {
-    dispatch({ type: "CHANGE_USER", payload: u });
+  const handleSelect = (chatId, userInfo) => {
+    handleChatSelect(chatId); //This is for Home component
+    setSelectedChat(chatId); //This is for the border style
+    dispatch({ type: "CHANGE_USER", payload: userInfo });
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (chats.length === 0) {
+    return <div>No chats yet</div>;
+  }
 
   return (
     <div className="chats">
       {Object.entries(chats)
         ?.sort((a, b) => b[1].date - a[1].date)
         .map((chat) => {
-          const lastMessage = chat[1].lastMessage;
+          const chatId = chat[0];
+          const chatData = chat[1];
+          const lastMessage = chatData.lastMessage;
           const isCurrentUserMessage =
             lastMessage?.senderId === currentUser.uid;
+          const isSelected = selectedChat === chatId;
 
           return (
             <div
-              className="userChat"
-              key={chat[0]}
-              onClick={() => handleSelect(chat[1].userInfo)}
+              className={`userChat ${isSelected ? "selected" : ""}`}
+              key={chatId}
+              onClick={() => handleSelect(chatId, chatData.userInfo)}
             >
-              <img src={chat[1].userInfo.photoURL} alt="" />
+              <img src={chatData.userInfo.photoURL} alt="" />
               <div className="userChatInfo">
-                <span>{chat[1].userInfo.displayName}</span>
+                <span>{chatData.userInfo.displayName}</span>
                 <p>
                   {isCurrentUserMessage && <i>You: </i>}
                   {lastMessage?.text ? (
@@ -65,5 +85,4 @@ const Chats = () => {
     </div>
   );
 };
-
 export default Chats;
