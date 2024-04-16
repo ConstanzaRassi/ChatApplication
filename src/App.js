@@ -11,7 +11,7 @@ function App() {
   const { currentUser } = useContext(AuthContext);
   const [showMobileMessage, setShowMobileMessage] = useState(false);
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 1024px)");
+    const mediaQuery = window.matchMedia("(max-width: 1400px)");
 
     const handleMediaChange = (mediaQuery) => {
       setShowMobileMessage(mediaQuery.matches);
