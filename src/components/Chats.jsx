@@ -31,6 +31,18 @@ const Chats = ({ handleChatSelect }) => {
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 
+  const handleEscKey = (event) => {
+    if (event.keyCode === 27) {
+      setSelectedChat(null);
+      handleChatSelect(null); // Deseleccionar el chat
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+    };
+  }, []);
   const handleSelect = (chatId, userInfo) => {
     handleChatSelect(chatId); //This is for Home component
     setSelectedChat(chatId); //This is for the border style
