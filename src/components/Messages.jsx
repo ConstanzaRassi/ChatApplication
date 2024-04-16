@@ -27,69 +27,57 @@ const Messages = () => {
     );
   };
 
-  const isSameYear = (date1, date2) => {
-    return date1.getFullYear() === date2.getFullYear();
-  };
-
-  const isToday = (date1, date2) => {
-    return date1.getDate() === date2.getDate();
-  };
-
-  const isYesterday = (date1, date2) => {
-    // Obtener las fechas de ayer y hoy
-    const yesterday = new Date(date2);
-    yesterday.setDate(yesterday.getDate() - 1);
-
-    // Compara solo el año, mes y día para determinar si es ayer
-    return (
-      date1.getFullYear() === yesterday.getFullYear() &&
-      date1.getMonth() === yesterday.getMonth() &&
-      date1.getDate() === yesterday.getDate()
-    );
-  };
-
   return (
     <div className="messages">
       {messages.map((m, index) => {
-        // Check if it's the first message or if the current message is from a different day
-        if (index === 0) {
-          index = 1;
-        }
-
         const message = messages[index - 1];
-        const seconds = message.date.seconds;
-
-        const seconds2 = m.date.seconds;
-
-        const currentMsgDate = new Date(seconds2 * 1000);
-        const previousMsgDate = new Date(seconds * 1000);
+        const currentMsgDate = m.date;
+        const today = new Date();
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
 
         const showDate =
           index === 0 ||
-          (currentMsgDate && !isSameDay(previousMsgDate, currentMsgDate));
+          !isSameDay(
+            new Date(currentMsgDate.seconds * 1000),
+            new Date(message.date.seconds * 1000)
+          );
+
         const showYear =
           index === 0 ||
-          (currentMsgDate && !isSameYear(previousMsgDate, currentMsgDate));
-        const isToday =
-          index === 0 ||
-          (currentMsgDate && isSameDay(previousMsgDate, currentMsgDate));
-        const isYesterdayDate =
-          index === 0 ||
-          (currentMsgDate && isYesterday(previousMsgDate, currentMsgDate));
+          new Date(currentMsgDate.seconds * 1000).getFullYear() !==
+            new Date(message.date.seconds * 1000).getFullYear();
 
         return (
           <div key={m.id}>
             {showDate && <div className="line"></div>}
-            {showYear && (
-              <div className="date">{currentMsgDate.getFullYear()}</div>
-            )}
             {showDate && (
               <div className="date">
-                {new Date(currentMsgDate).toLocaleDateString("en-US", {
-                  weekday: "long",
-                  day: "numeric",
-                  month: "short",
-                })}
+                {showYear && (
+                  <div className="date">
+                    {" "}
+                    {new Date(currentMsgDate.seconds * 1000).getFullYear()}
+                  </div>
+                )}
+                {isSameDay(new Date(currentMsgDate.seconds * 1000), today) ? (
+                  <span>Today</span>
+                ) : isSameDay(
+                    new Date(currentMsgDate.seconds * 1000),
+                    yesterday
+                  ) ? (
+                  <span>Yesterday</span>
+                ) : (
+                  <span>
+                    {new Date(currentMsgDate.seconds * 1000).toLocaleDateString(
+                      "en-US",
+                      {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "short",
+                      }
+                    )}
+                  </span>
+                )}
               </div>
             )}
             <Message message={m} />
